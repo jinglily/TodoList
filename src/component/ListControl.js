@@ -5,11 +5,14 @@ class TodoControl extends React.Component{
     this.props.handleShow(n)
   }
   render(){
+    let name = ['ALL','Active','Completed'];
+    let button = name.map((item,i) =>
+      <button onClick={this.handleShow.bind(this,i)}
+          style={this.props.show==i ? {backgroundColor:'blue'} : null} key={i}>{item}</button>
+    )
     return(
       <div>
-      <button onClick={this.handleShow.bind(this,0)}>ALL</button>
-      <button onClick={this.handleShow.bind(this,1)}>Active</button>
-      <button onClick={this.handleShow.bind(this,2)}>Completed</button>
+      {button}
       </div>
     )
   }

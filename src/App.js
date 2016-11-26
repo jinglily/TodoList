@@ -14,9 +14,7 @@ class App extends React.Component{
     }
   }
   handleChange(id){
-    var index = this.state.items.findIndex(function (ele) {
-      return id==ele.id
-    })
+    let index = this.myFindIndex(id);
     var icon = !this.state.items[index].completed;
     this.state.items[index].completed = icon;
     this.setState(
@@ -27,15 +25,17 @@ class App extends React.Component{
 
   }
   handleDel(id){
-    var index = this.state.items.findIndex(function (ele) {
-      return id==ele.id
-    })
+    let index = this.myFindIndex(id);
     this.state.items.splice(index,1);
     this.setState(
       {
         items:this.state.items
       }
     )
+  }
+  myFindIndex(id){
+    var index = this.state.items.findIndex((ele) =>  id==ele.id)
+    return index
   }
   handleSunmit(e){
     e.preventDefault();
@@ -73,7 +73,7 @@ class App extends React.Component{
       <input placeholder='add a todo' ref='input'/>
       <button>ADD #{this.state.items.length + 1}</button>
       </form>
-      <TodoControl handleShow={this.handleShow.bind(this)}/>
+      <TodoControl handleShow={this.handleShow.bind(this)} show={this.state.show}/>
     </div>
     )
   }
